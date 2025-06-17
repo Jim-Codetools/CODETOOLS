@@ -27,6 +27,7 @@ body{
     justify-content: center;
     align-items: center;
 	height: calc(100vh - 100px); 
+	min-width: 980px;
 }
 
 .contact {
@@ -105,6 +106,8 @@ body{
 	margin-left: calc( max(10%, 110px) );
 	height: 100%;
 	
+	min-width: 870px;
+	
 	
 }
 
@@ -121,7 +124,7 @@ body{
     display: flex; /* Add flex display */
     align-items: center; /* Vertically center the items */
     width: 100%;
-   
+	min-width: 1100px; 
     height: 100px;
 	justify-content:center;
     background-color: rgb(3, 104, 148);
@@ -189,7 +192,7 @@ button:hover {
 
 .addBtn, .addSkylight, .addWindow {
 	color: white;
-	background-color: rgb(4, 104, 148);*/
+	background-color: rgb(4, 104, 148);
 }
 
 .lessBtn, .removeSkylight, .lessWall, .removeWindow {
@@ -286,12 +289,32 @@ select{
 	width: 870px;
 	margin: 0 auto;
 	
+	
 }
 
 .containerC {
 	width: 780px;
 	margin: 0 auto;
 	
+}
+
+.joineryNames{
+	background-color: rgb(240, 240, 240);
+	width: 82px;
+	height:28px;
+	font-size: 12pt;
+	color: rgb(117, 117, 117);
+	outline: none; 
+	border: none;	
+	text-align: right;
+	padding: 0px 4px 0px 0px;
+	border-radius: 6px;
+	
+}
+
+.joineryNames:hover {
+	background-color: white;
+  
 }
 
 .containerD {
@@ -303,10 +326,18 @@ select{
 	
 }
 
-.calcSec{
+.grey{
 	background-color: rgb(240, 240, 240);
 	width: 100%;
-	/*min-width: 1100px; */
+	min-width: 1100px; 
+	
+}
+
+.white{
+	background-color: white;
+	width: 100%;
+	min-width: 1100px; 
+	
 }
 
 .formHead{
@@ -368,13 +399,19 @@ select{
 }
 
 .headingBar {
+	display: flex;
 	margin: 0;
 	border-radius: 0px;
-	
-	
 }
 
-.roof, .wall {
+.overR {
+	padding: 34px 0px 0px 0px;
+	margin-left: 20px;
+}
+
+
+
+.roof, .wall, .floor {
 	border-bottom: 1px solid gray;
 	margin-bottom: 17px;
 }
@@ -391,7 +428,7 @@ select{
 
 .windows{
 	border: 0px solid blue;
-	margin-left: 70px;
+	margin-left: 62px;
 	margin-right: 40px;
 }
 
@@ -400,9 +437,11 @@ select{
 	font-size:28px;
 	margin-left:60px;
 	font-weight:bold;
-	color: rgb(3, 104, 148);
-	
-	
+	color: rgb(3, 104, 148);	
+}
+
+.areaCheck{
+	width:90px;
 }
 
 .itemName{
@@ -565,8 +604,28 @@ input[type="number"].rValueA {
 	line-height: 28px;
 }
 
+.unitsA{
+	position: relative;
+	vertical-align: middle;
+	text-align:center;
+	width:20px;
+	height: 18px;
+	line-height: 18px;
+	font-size:10pt;
+}
+
+
 .nextTo{
 	display: flex;
+}
+
+.resUnits{
+	font-size:10pt;
+}
+
+.nextToA{
+	display: flex;
+	align-items: baseline;
 }
 
 .parameters{
@@ -685,12 +744,24 @@ input[type="radio"]{
 	vertical-align: middle;
 }
 
-.rValueOp, .distanceOp{
+.rValueOp{
+	width: 46px;
 	text-align: center;
-	width: 80px;
-	margin:0px 0px 5px 0px;
+	margin:0px 10px 5px 0px;
 	padding: 0px;
-	background-color: rgb(240, 240, 240);
+	color: rgb(117, 117, 117);
+	border: 0px;
+	border-radius: 0px;
+	font-family: Helvetica;
+	font-size:11pt;
+	height: 28px;
+	vertical-align: middle;
+}
+.distanceOp{
+	width: 80px;
+	text-align: center;
+	margin:0px 2px 5px 0px;
+	padding: 0px;
 	color: rgb(117, 117, 117);
 	border: 0px;
 	border-radius: 0px;
@@ -700,12 +771,56 @@ input[type="radio"]{
 	vertical-align: middle;
 }
 
+
+.areaOp{
+	text-align: center;
+	width: 80px;
+	margin:0px 2px 5px 0px;
+	padding: 0px;
+	color: rgb(117, 117, 117);
+	border: 0px;
+	border-radius: 0px;
+	font-family: Helvetica;
+	font-size:11pt;
+	height: 28px;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center; /* horizontal center */
+	align-items: center;     /* vertical center */       /* or any height you want */
+	
+}
+
+.windowUnit{
+	text-align: center;
+	width: 16px;
+	margin:0px 0px 0px 0px;
+	padding: 0px;
+	background-color: white;
+	color: rgb(117, 117, 117);
+	border: 0px;
+	border-radius: 0px;
+	font-family: Helvetica;
+	font-size:11pt;
+	height: 28px;
+	vertical-align: middle;
+	display: flex;
+	justify-content: center; /* horizontal center */
+	align-items: center;     /* vertical center */       /* or any height you want */
+	
+}
+
+
 .rValueOp{
 	border-radius: 0px 6px 6px 0px;
 }
 
 .unitTitle{
 	width:24px;
+}
+
+.unitF{
+	font-size:9pt;
+	width:20px;
 }
 
 .tableM{
@@ -729,10 +844,19 @@ input[type="radio"]{
 
 
 .column{
-	width: 80px;
+	margin: 0px 2px 0px 0px;
 	text-align: center;
 	border:0px;
+	width: 80px;
 }
+
+.columnS{
+	margin: 0px 2px 0px 0px;
+	text-align: center;
+	border:0px;
+	width: 46px;
+}
+
 
 .centered-text {
   display: inline;
