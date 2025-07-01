@@ -2,10 +2,9 @@
 <html>
 <head>
     <link rel="stylesheet" href="calcstyle.css">
-    <link rel="icon" href="/Media/Favicon.svg" type="image/svg+xml">	
     <title>H1 Energy Efficiency - Compliance Calculator</title>
 	<meta name="description" content="A calculator for assessing the thermal efficiency of timber framed buildings and checking compliance with New Zealand Building Code clause H1. Based on the calculation method described in H1/AS1 5th edition, amendment 1">
-	<meta name="keywords" content="Energy efficiency, thermal efficiency, H1 compliance, H1/AS1, New Zealand Building Code, building thermal calculator, climate zones, R-value, thermal resistance, thermal conductivity, building insulation, energy efficiency">
+	<meta name="keywords" content="thermal efficiency, H1 compliance, H1/AS1, New Zealand Building Code, building thermal calculator, climate zones, R-value, thermal resistance, thermal conductivity, building insulation, energy efficiency">
 
 	
 	<meta charset="UTF-8">
@@ -272,14 +271,20 @@
 						</div>
 							
 							<div class="half" id="slabFeatures">
-								<div class="sides">
+								<div class="sides">									
 									<label for="veneer">Features</label><br>
-									<input type="checkbox" id="veneer" name="veneer" onchange="toggle('veneer', this.checked)">
-									<label for="veneer">Brick Veneer (all ext walls)</label><br>
-									<input type="checkbox" id="slabEdge" name="slabEdge" onchange="toggle('edge', this.checked)">
-									<label for="slabEdge">Vertical Edge Insulation R1.0</label><br>
-									<input type="checkbox" id="underSlab" name="underSlab" onchange="toggle('under', this.checked)">
-									<label for="underSlab">Under Slab Insulation R1.2</label>
+
+									<div id="slabFeatHide">
+										<input type="checkbox" id="veneer" name="veneer" onchange="toggle('veneer', this.checked)">
+										<label for="veneer">Brick Veneer (all ext walls)</label><br>
+										<input type="checkbox" id="slabEdge" name="slabEdge" onchange="toggle('edge', this.checked)">
+										<label for="slabEdge">Vertical Edge Insulation R1.0</label><br>
+										<input type="checkbox" id="underSlab" name="underSlab" onchange="toggle('under', this.checked)">
+										<label for="underSlab">Under Slab Insulation R1.2</label><br>
+									</div>	
+									
+									<input type="checkbox" id="embHeat" name="embHeat" onchange="toggleEmb('embed', this.checked)">
+									<label for="underSlab" style="font-weight:bold;">Embedded Heating</label>
 								</div>
 							</div>
 					
@@ -310,6 +315,14 @@
 						</div>
 					
 					</div>	
+					
+
+					<div class = "warning" id="slabWarnBr" style="display:none;">
+						
+						<br>
+						<p id="slabWarn"></p> 
+							
+					</div>
 				
 				</div>
 				
@@ -452,9 +465,9 @@
 					
 					<div class = "warning">
 						
-							<p id="winWarn"></p> 
+						<p id="winWarn"></p> 
 							
-						</div>
+					</div>
 				
 				</div>
 					

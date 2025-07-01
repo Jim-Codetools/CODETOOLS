@@ -20,6 +20,7 @@ let roofOver = {};
 let floorOver = {};
 let wallOver = {};
 
+let slabRvalue = 0;
 
 let roofRefR = 0;
 let wallRefR = 0;
@@ -318,12 +319,6 @@ function addFloor() {
 							</select>
 						</div>
 						
-						<div class="sides1" style="display:none;" id="heightEnt${floorCount}">
-							<label for="subHeight">Height</label>
-							<br>
-							<input class="distance" type="number" id="subHeight${floorCount}" name="subHeight${floorCount}" min="0.1" max="3" step="0.1" onchange="updateRoundedValue('subHeight${floorCount}'); calcFloorR(${floorCount})"><span class="units">m</span>
-						</div>
-						
 						<div class="sides1" style="display:none;" id="periEnt${floorCount}">
 							<label for="floorPerimeter" style="display: inline-block; width: 120px;">Perimeter length</label>
 							<br>
@@ -372,13 +367,10 @@ function addFloor() {
 		
 		const floor = new Floor(0, 0, []);
 	
-		console.log("a new floor has been created " + floor)
+		
 		houseFloors.push(floor);
 		
-		console.log("Floor area " + floor.floorArea);
-		console.log("Floor R " + floor.floorR);
-		console.log("next");
-		console.log("this here " + houseFloors[0].floorR);
+		
 		
 		
 		document.getElementById(`spaceEnt${floorCount}`).style.display = "none";
@@ -596,13 +588,8 @@ function addRoof() {
 		
 		const roof = new Roof(0, 0, []);
 	
-		console.log("a new roof has been created " + roof)
-		houseRoofs.push(roof);
 		
-		console.log("Roof area " + roof.roofArea);
-		console.log("Roof R " + roof.roofR);
-		console.log("next");
-		console.log("this here " + houseRoofs[0].roofR);
+		houseRoofs.push(roof);
 		
 		calcRoofR(roofCount);
 		
@@ -637,15 +624,12 @@ function lessFloor(){
 		
 		floorTypes.removeChild(floorToRemove);
 		
-		console.log(floorToRemove + ' removed');
 		
 		floorCount--;
 		
 		
 		houseFloors.pop();
 		
-		
-		console.log(houseFloors);
 		
 		refBuilding();
 		
@@ -685,8 +669,8 @@ function calcFloorR(floorNumber){
 	const insuSelect = document.getElementById(`floorR${floorNumber}`);
 	const periSelect = document.getElementById(`floorPerimeter${floorNumber}`);
 	const closeSelect = document.getElementById(`periType${floorNumber}`);
-	const heightEnt = document.getElementById(`heightEnt${floorNumber}`);
-	const heightSelect = document.getElementById(`subHeight${floorNumber}`);
+
+	
 	const liningSelect = document.getElementById(`floorLine${floorNumber}`);
 	const airOpt = document.getElementById(`spaceEnt${floorNumber}`);
 	const airSelect = document.getElementById(`airSpace${floorNumber}`);
@@ -700,16 +684,11 @@ function calcFloorR(floorNumber){
 	const overSelect = document.getElementById(`floorOv${floorNumber}`);
 	const overRide = (document.getElementById(`floorOverR${floorNumber}`)).value;
 	const gapSelect = document.getElementById(`gapEnt${floorNumber}`);
-	
-	console.log("override R val =" + overRide);
-	console.log("And Type =" + typeof(overRide));
+
 	
 	
 	const periEnt = document.getElementById(`periEnt${floorNumber}`);
 	
-	console.log("Checking this ----" + airOpt);
-	
-	console.log("joist check " + joistSelect.value);
 	
 	let joistWidth, joistThick, joistSpacing, insuR, rFramingRvalue, rFramingLayer, periLen, enclose, subR, subHeight, lining, airSpace;
 	
@@ -722,7 +701,6 @@ function calcFloorR(floorNumber){
 		overSelect.style.display = "";
 		
 		floorRvalue = Number(overRide);
-		console.log("what is the Rvalue here " + floorRvalue);
 	}
 	else{
 		insuEntSelect.style.display = "";
@@ -763,43 +741,32 @@ function calcFloorR(floorNumber){
 	insuR = Number(insuSelect.value);
 	periLen = Number(periSelect.value);
 	enclose = closeSelect.value;
-	subHeight = Number(heightSelect.value);
+	
 	lining = liningSelect.value;
 	airSpace = airSelect.value;
 	
 	
 	
-	
-	console.log("the lining under is ---" + lining);
-	
-	
 	if (lining == 'none'){
 		airOpt.style.display = "none";
 		liningR = 0;
-		console.log("there is no lining, and the R" + liningR);
 	}
 	else {
 		airOpt.style.display = "";
 		
 		if (lining == 'plaster'){
 			liningR = 0.04;
-			console.log("the data type is ---" + typeof liningR)
-			console.log("the lining is Plaster, and the R" + liningR);
+			
 		}
 		else if (lining == 'fcSheet'){
 			liningR = 0.02;
-			console.log("the data type is ---" + typeof liningR)
-			console.log("the lining is Fibre Cement, and the R" + liningR);
+	
 		}
 		else if (lining == 'timber'){
 			liningR = 0.07;
-			console.log("the data type is ---" + typeof liningR)
-			console.log("the lining is Timber, and the R" + liningR);
 		}
 		else if (lining == 'other'){
 			liningR = 0.02;
-			console.log("the data type is ---" + typeof liningR)
-			console.log("the lining is Other, and the R" + liningR);
 		}
 		
 		
@@ -826,87 +793,71 @@ function calcFloorR(floorNumber){
 	}
 	
 	subR = 0;
-	console.log("Data types");
-	console.log(typeof subR);
-	console.log(typeof floorArea);
-	console.log(typeof periLen); 
-	console.log(typeof subHeight); 
 	
 	if (enclose != 'open'){
 		
-		heightEnt.style.display = "";
 		
 		periEnt.style.display = "";
 		
 		
 		
-		if (subHeight > 0 && periLen >0) {
+		if (apRatio > 0) {
 			
-			if (subHeight < 0.5 ){
-				subHeight = 0.5;
+			if (apRatio < 1.5){
+				subR = 0.06
 			}
-			else if ( subHeight > 1.1){
-				subHeight = 1.1;
+			else if (apRatio >= 1.5 && apRatio < 2.0){
+				subR = 0.09
 			}
-			
-			console.log("why is this code running?????");
-		
-			subR = ((floorArea/periLen)*0.1)*(-0.9*subHeight+1.45);
+			else if (apRatio >= 2.0 && apRatio < 2.5){
+				subR = 0.11
+			}
+			else if (apRatio >= 2.5 && apRatio < 3.0){
+				subR = 0.14
+			}
+			else if (apRatio >= 3.0 && apRatio < 3.5){
+				subR = 0.17
+			}
+			else if (apRatio >= 3.5 && apRatio < 4.0){
+				subR = 0.20
+			}
+			else if (apRatio >= 4.0 && apRatio < 4.5){
+				subR = 0.23
+			}
+			else if (apRatio >= 4.5 && apRatio < 5.0){
+				subR = 0.26
+			}
+			else if (apRatio >= 5.0 && apRatio < 5.5){
+				subR = 0.29
+			}
 			
 		}
 		
 	}
 	else{
-		heightEnt.style.display = "none";
 		periEnt.style.display = "none";
 	}
-	
-	console.log ("Subfloor Thermal resistance = " + subR);
-	console.log ("R-Val of subfloor space = " + subSpaceR);
 	
 	insuRatio = (joistSpacing-joistThick)/joistSpacing;
 	
 	framingRatio = 1 - insuRatio;
 	
-	console.log("joist width " + joistWidth);
-	console.log("joist thickness " + joistThick);
-	console.log("joist spacing " + joistSpacing);
-	console.log("insulation R-Value " + insuR);
-	console.log("Timber Floor Perimeter Length " + periLen);
-	console.log("Edge type " + enclose);
-	console.log("A/P " + apRatio);
-	
-	console.log("Joist insu ratio" + insuRatio);
-	console.log("Joist frame ratio" + framingRatio);
-	
 	rFramingRvalue = joistWidth/0.12;
 	
-	console.log("check this right here" + typeof framingRatio, framingRatio, typeof rFramingRvalue, rFramingRvalue, typeof insuRatio, insuRatio, typeof insuR, insuR, typeof airSpaceR, airSpaceR);
 	
 	rFramingLayer = 1/((framingRatio/(rFramingRvalue))+(insuRatio/(insuR + airSpaceR)));
 	
-	console.log("the lining R added is --" +liningR);
 	
 	floorRvalue = 0.09 + 0.14 + rFramingLayer + liningR + subR + 0.03;
 	floorRvalue = floorRvalue.toFixed(2);
 
 }
 	
-	console.log("Joist floor has an R value of " + floorRvalue);
-	
 	
 	flrLoss = (floorArea / floorRvalue).toFixed(2);
-	console.log(flrLoss + "Floor loss W/C");
-		
-	
-	console.log("The R value of this floor is " + floorRvalue);
-	
-	console.log("the floor num is " + floorNumber);
 	
 	houseFloors[(floorNumber-1)].floorR = Number (floorRvalue);
 	houseFloors[(floorNumber-1)].floorArea = Number (floorArea);
-	
-	console.log("The R value saved in the array is " + houseFloors[floorNumber-1].floorR + " And the area is " + houseFloors[floorNumber-1].floorArea);
 	
 	let framePrt = (framingRatio*100).toFixed(1);
 	let insuPrt = (insuRatio*100).toFixed(1);
@@ -946,10 +897,6 @@ function calcFloorR(floorNumber){
 		document.getElementById(`floorResult${floorNumber}`).innerHTML = ``;
 		floorBr.style.display = 'none';
 	}
-	
-	console.log("the air space is " + airSpace);
-	console.log("***the air space R is " + airSpaceR);
-	console.log(typeof airSpaceR);
 	
 	
 	
@@ -1026,7 +973,6 @@ roofs.addEventListener('click', (event) => {
 		
 			lessSky.style.display = "";
 			
-			console.log(skybar);
 		
 			if (skyCount != null){
 				
@@ -1039,6 +985,11 @@ roofs.addEventListener('click', (event) => {
 	}
 	
 });
+
+
+
+
+
 
 
 
@@ -1058,8 +1009,6 @@ roofs.addEventListener('click', (event) => {
 			const skyToRemove = document.getElementById(`sky${roofNum}_${skyCount}`);
 			
 			skylights.removeChild(skyToRemove);
-			
-			
 			
 			(houseRoofs[(roofNum-1)].skylights).pop();
 			
@@ -1111,14 +1060,10 @@ function lessRoof(){
 		roofTypes.removeChild(roofToRemove);
 		
 		
-		
 		roofCount--;
 		
 		
 		houseRoofs.pop();
-		
-		
-		
 		
 		refBuilding();
 		
@@ -1183,7 +1128,6 @@ function calcRoofR(roofNumber){
 				break;
 		}
 	}
-		
 		
 		
 		if(roofType === 'truss') {
@@ -1277,7 +1221,6 @@ function calcRoofR(roofNumber){
 			
 			roofRvalue = 0.09 + 0.04 + rFramingLayer + 0.03;
 			roofRvalue = roofRvalue.toFixed(2);
-			
 		
 		}
 	}
@@ -1323,11 +1266,14 @@ function calcSkylight(roofNumber, skyNumber){
 	houseRoofs[(roofNumber-1)].skylights[(skyNumber-1)].skylightR = skyR;
 	
 	
+	
 	calcRoofR(roofNumber);
 		
 		
 	
 }
+
+
 
 
 
@@ -1479,6 +1425,7 @@ function addWall() {
 	
 	houseWalls.push(wall);
 	
+	
 	const winbar = document.getElementById(`winBar${wallCount}`);
 	const lessWinBtn = document.getElementById(`lessWin${wallCount}`);
 		
@@ -1518,6 +1465,7 @@ function wallArea(wallCount){
 	} else {
 		byArea = false;
 	}
+	
 	
 	
 	const wallDimsIn = document.getElementById(`wallDimsIn${wallCount}`);
@@ -1596,7 +1544,7 @@ function updateRoundedValue(inputId) {
     
     let inputElement = document.getElementById(inputId);
 
-    
+ 
     let userValue = parseFloat(inputElement.value);
 
     
@@ -1745,7 +1693,6 @@ function updateResults(){
 		let grossWallArea = houseWalls[i].wallArea;
 		
 		
-		
 		let openingCount = houseWalls[i].openings.length;
 		
 		
@@ -1801,6 +1748,7 @@ function updateResults(){
 
 function updateRoofResults(){
 	
+	
 	let grossRoofArea = 0;
 	
 	
@@ -1821,6 +1769,8 @@ function updateRoofResults(){
 			
 			grossSkyArea = grossSkyArea + skyArea;
 			
+			
+			
 			if (skyArea > 0 && skyR > 0){
 			document.getElementById(`areaLossA${(i+1)}_${(x+1)}`).innerHTML = ` ${skyAreaPrint}`;
 			document.getElementById(`areaLossB${(i+1)}_${(x+1)}`).innerHTML = `${skyLoss}<span class="resUnits">W/°C</span>`;
@@ -1834,6 +1784,7 @@ function updateRoofResults(){
 		
 		let nettRoofArea = (grossRoofArea - grossSkyArea).toFixed(2);
 		let roofRVal = houseRoofs[i].roofR;
+		
 		
 		let roofLoss = (nettRoofArea / roofRVal).toFixed(2);
 		
@@ -1920,6 +1871,7 @@ function updateOptions(){
 addWall();
 
 
+
 addWallType();
 
 
@@ -1958,9 +1910,11 @@ function lessWall(){
 		
 		building.removeChild(wallToRemove);
 		
+		
 		wallCount--;
 		
 		houseWalls.pop();
+		
 		
 		refBuilding();
 		
@@ -2119,15 +2073,10 @@ building.addEventListener('click', (event) => {
 
 
 
-
-
-
-
-
-
 let veneer = 'no';
 let slabEdge = 0;
 let underSlab = 0;
+let embHeat = 'no'; 
 
 
 
@@ -2143,6 +2092,15 @@ function toggle(attribute, checked){
 	}
 	calcSlabR();
 }
+
+function toggleEmb(attribute, checked){
+	if (attribute === 'embed'){
+		embHeat = checked ? 'yes' : 'no';
+	}
+	setClimate();
+}
+
+
 
 let slabOver = 'no';
 
@@ -2182,14 +2140,13 @@ function calcSlabR() {
 	
 	const overrideSelect = (document.getElementById('slabOver'));
 	const sTypeSelect = (document.getElementById('slabTypeD'));
-	const slabFeaturesSelect = (document.getElementById('slabFeatures'));
+	const slabFeaturesSelect = (document.getElementById('slabFeatHide'));
 	
 	const sPeriSelect = (document.getElementById('sPeri'));
 	const periNoteSelect = (document.getElementById('periNote'));
 	
 	let slabOverR = Number((document.getElementById('slabOverR')).value);
-	
-	
+
 	
 	if (slabOver == 'yes'){
 		overrideSelect.style.display = "";
@@ -2208,7 +2165,6 @@ function calcSlabR() {
 	
 	
 	let apRatio = 0;
-	let slabRvalue = 0;
 
 
 		const slabTypeSelect = document.getElementsByName(`type`);
@@ -2239,10 +2195,13 @@ function calcSlabR() {
 		
 		
 		
-		
-		apRatio = slabArea / slabPerimeter;
-		apRatio = apRatio.toFixed(2);
-		
+		if (slabArea > 0 && slabPerimeter > 0 && slabOver == 'no'){
+			apRatio = slabArea / slabPerimeter;
+			apRatio = apRatio.toFixed(2);
+		}
+		else {
+			apRatio = 0;
+		}
 
 	if (slabOver == 'yes'){
 		slabRvalue = slabOverR;
@@ -2655,8 +2614,13 @@ function calcSlabR() {
 		
 		if (slabLoss > 0 && slabLoss < 500 && slabArea <= 300) {
 			
+			if(apRatio > 0){
+				document.getElementById("slabDets").innerHTML = "A/P Ratio " + apRatio + " | R" + slabRvalue.toFixed(1);
+			}
+			else{
+				document.getElementById("slabDets").innerHTML = "R" + slabRvalue.toFixed(1);
+			}
 			
-			document.getElementById("slabDets").innerHTML = "A/P Ratio " + apRatio + " | R" + slabRvalue.toFixed(1);
 			document.getElementById("sLabel").innerHTML = "Heat Loss =";
 			document.getElementById("slabResult").innerHTML = slabLoss + '<span class="resUnits">W/°C</span>';
 
@@ -2672,6 +2636,17 @@ function calcSlabR() {
 			
 			slabBr.style.display = 'none';
 			
+		}
+		
+		const slabWarnDiv = document.getElementById(`slabWarnBr`);
+		
+		if(embHeat == 'yes' && slabRvalue < slabRefR && slabRvalue > 0){
+			slabWarnDiv.style.display = '';
+			document.getElementById("slabWarn").innerHTML = "WARNING! The slab must have a thermal resistance no less than R" + slabRefR;
+		}
+		else{
+			slabWarnDiv.style.display = 'none';
+			document.getElementById("slabWarn").innerHTML = "";
 		}
 		
 		refBuilding();
@@ -2696,8 +2671,6 @@ function calcWallR(wallTypeNumber) {
 	const airDivSelect = document.getElementById(`airDiv${wallTypeNumber}`);
 	const wallTypBr = document.getElementById(`wallTypBr${wallTypeNumber}`);
 	
-	
-	
 	const cladLabel = document.querySelector(`label[for='claddingType${wallTypeNumber}']`);
 	
 	const locationSelect = document.getElementsByName(`location${wallTypeNumber}`);
@@ -2708,10 +2681,6 @@ function calcWallR(wallTypeNumber) {
 			break;
 			}
 	}
-	
-	console.log("Also checking this" + claddingSelect);
-	
-	console.log("Check -" + claddingSelect);
 	
 	if(locationValue === 'internal') {
 		claddingSelect.style.display = "none";
@@ -2725,9 +2694,6 @@ function calcWallR(wallTypeNumber) {
     }
 	
 	
-	console.log("wall " + wallTypeNumber + "location " + locationValue);
-	
-	
 	let studWidth, studThickness, nogQty, framingRvalue, framingLayer, cavityLayer, claddingLayer, wallRvalue, airBarR;
 	
 	if(airBar === 'flexUnder'){
@@ -2739,8 +2705,6 @@ function calcWallR(wallTypeNumber) {
 	else if (airBar === 'fcUnder'){
 		airBarR = 0.02;
 	}
-	
-	console.log('the air barrier is ' + airBar + ' and it Rval is ' + airBarR);
 	
 	
 	
@@ -2768,15 +2732,6 @@ function calcWallR(wallTypeNumber) {
 	
 	const studSpacing = Number(studSpacingSelect.value);
 	const insulationRvalue = Number(insulationSelect.value);
-	
-	
-	
-	console.log("stud thickness" + studThickness);
-	console.log("stud spacing" + studSpacing);
-	console.log("Nog Quantity" + nogQty);
-	console.log(studThickness*2.4);
-	console.log(nogQty*(studSpacing*0.045));
-	console.log(2.4*studSpacing);
 	
 	
 	let insulationRatio = ((studSpacing-studThickness)*(2.4-nogQty*0.045))/(2.4*studSpacing);
@@ -2822,20 +2777,9 @@ function calcWallR(wallTypeNumber) {
 	
 	let arrayRef = wallTypeNumber - 1;
 	
-	console.log("Wall R-Value - " + wallRvalue );
-	console.log("Wall Type - " + wallTypeNumber);
-	
 	wallValues[arrayRef] = wallRvalue;
 	
-	console.log(wallValues);
-	
-	console.log("Wall " + wallTypeNumber);
-	console.log("Framing " + framingRatio);
-	console.log("Insulation " + insulationRatio);
-	console.log(framingLayer);
-	
 	if (insulationRvalue > 0){
-			
 			wallTypBr.style.display = '';
 			document.getElementById(`wallDets${wallTypeNumber}`).innerHTML = `Framing ${framePrint}% | Insulation ${insuPrint}% | R${wallRvalue}`;
 		}
@@ -2867,7 +2811,16 @@ function setClimate(){
 	if (climateZone === '1'){
 		roofRefR = 6.6;
 		wallRefR = 2.0;
-		slabRefR = 1.5;
+		
+		if(embHeat == 'no'){
+			slabRefR = 1.5;
+		
+		}
+		else{
+			slabRefR = 2.5;
+			
+		}
+
 		floorRefR = 2.5;
 		openingRefR = 0.46;
 		skylightRefR = 0.46;
@@ -2875,7 +2828,16 @@ function setClimate(){
 	else if (climateZone === '2'){
 		roofRefR = 6.6;
 		wallRefR = 2.0;
-		slabRefR = 1.5;
+		
+		if(embHeat == 'no'){
+			slabRefR = 1.5;
+			
+		}
+		else{
+			slabRefR = 2.5;
+			
+		}
+		
 		floorRefR = 2.5;
 		openingRefR = 0.46;
 		skylightRefR = 0.46;
@@ -2884,6 +2846,16 @@ function setClimate(){
 		roofRefR = 6.6;
 		wallRefR = 2.0;
 		slabRefR = 1.5;
+		
+		if(embHeat == 'no'){
+			slabRefR = 1.5;
+			
+		}
+		else{
+			slabRefR = 2.5;
+			
+		}
+		
 		floorRefR = 2.5;
 		openingRefR = 0.46;
 		skylightRefR = 0.54;
@@ -2891,7 +2863,17 @@ function setClimate(){
 	else if (climateZone === '4'){
 		roofRefR = 6.6;
 		wallRefR = 2.0;
-		slabRefR = 1.5;
+		
+		if(embHeat == 'no'){
+			slabRefR = 1.5;
+			
+		}
+		else{
+			slabRefR = 2.8;
+			
+		}
+		
+		
 		floorRefR = 2.8;
 		openingRefR = 0.46;
 		skylightRefR = 0.54;
@@ -2900,6 +2882,16 @@ function setClimate(){
 		roofRefR = 6.6;
 		wallRefR = 2.0;
 		slabRefR = 1.6;
+		
+		if(embHeat == 'no'){
+			slabRefR = 1.6;
+			
+		}
+		else{
+			slabRefR = 3.0;
+			
+		}
+
 		floorRefR = 3.0;
 		openingRefR = 0.5;
 		skylightRefR = 0.62;
@@ -2908,6 +2900,16 @@ function setClimate(){
 		roofRefR = 6.6;
 		wallRefR = 2.0;
 		slabRefR = 1.7;
+		
+		if(embHeat == 'no'){
+			slabRefR = 1.7;
+			
+		}
+		else{
+			slabRefR = 3.0;
+			
+		}
+		
 		floorRefR = 3.0;
 		openingRefR = 0.5;
 		skylightRefR = 0.62;
@@ -2915,19 +2917,16 @@ function setClimate(){
 	
 	refBuilding();
 	
-	console.log("Roof R" + roofRefR);
-	console.log("Wall R" + wallRefR);
-	console.log("Slab R" + slabRefR);
-	console.log("Floor R" + floorRefR);
-	console.log("opening R" + openingRefR);
-	console.log("skylight R" + skylightRefR);	
+	calcSlabR();
+	
+		
 	
 }
 
 
 function refBuilding (){
 	
-		console.log("refbuilding function has ran!!!!!!!!");
+		
 	
 		let refLoss = 0;
 		
@@ -2938,7 +2937,7 @@ function refBuilding (){
 		for (let w = 0; w < wallCount; w++) {
 			
 			grossWallArea = grossWallArea + (houseWalls[w].wallArea);
-			console.log("ref build wall area " + grossWallArea);	
+			
 		}
 		
 		let nettWallArea = grossWallArea * 0.7;
@@ -2948,12 +2947,9 @@ function refBuilding (){
 		
 		let openingLoss = openingArea / openingRefR;
 		
-		console.log("Reference Building Wall loss " + wallLoss + " W/°C " + "Window Loss " + openingLoss + " W/°C ");
-		
 		for (let r = 0; r < roofCount; r++) {
 			
-			grossRoofArea = grossRoofArea + houseRoofs[r].roofArea;
-			console.log("ref build roof area " + grossRoofArea);	
+			grossRoofArea = grossRoofArea + houseRoofs[r].roofArea;	
 			
 		}
 		
@@ -2967,14 +2963,9 @@ function refBuilding (){
 			document.getElementById("roofVals").innerHTML = '';
 		}
 		
-		console.log("Reference Building Roof loss " + roofLoss + " W/°C ");
-		console.log(grossRoofArea);
-		
 	
-		console.log('****floor slab area = ' + floorSlabArea + " slab ref R-val " + slabRefR);
 		let refSlabLoss = floorSlabArea / slabRefR;
 		
-		console.log("Reference Building Slab loss " + refSlabLoss + " W/°C ");
 		
 		
 		
@@ -2982,16 +2973,15 @@ function refBuilding (){
 		for (let r = 0; r < floorCount; r++) {
 			
 			grossFloorArea = grossFloorArea + houseFloors[r].floorArea;
-			console.log("ref build floor area " + grossFloorArea);	
+				
 		}
 		
 		let refFloorLoss = grossFloorArea / floorRefR;
-		
-		console.log("Reference Building Floor loss " + refFloorLoss + " W/°C ");
+
 		
 		refLoss = Number((wallLoss + openingLoss + roofLoss + refSlabLoss + refFloorLoss).toFixed(2));
 		
-		console.log("Total ref building heat loss " + refLoss + " W/°C");
+	
 		
 		
 		
@@ -3019,7 +3009,6 @@ function refBuilding (){
 		
 		
 		if (roofLoss > 0 && roofLoss < 500){
-			console.log("!!!!this shouldn't be happening");
 			document.getElementById("refRoof").innerHTML = roofLoss.toFixed(2) + '<span class="resUnits">W/°C</span>';
 			document.getElementById("roofVals").innerHTML = "= " + grossRoofArea.toFixed(1) + "m²" + " / " + "R" + roofRefR;
 		}
@@ -3098,7 +3087,6 @@ function proBuilding(refLoss){
 		
 		totalLoss = totalLoss + roofLoss;
 		
-		console.log("Roof - the total loss at this time is " + totalLoss);
 	}	
 	
 	
@@ -3107,30 +3095,17 @@ function proBuilding(refLoss){
 	for (let i = 0; i < floorCount; i++){
 		
 		let nettFloorArea = Number(houseFloors[i].floorArea);
-		console.log(nettFloorArea + "= nett Floor area");
-		console.log(typeof(nettFloorArea));
 	
 		let floorRVal = Number(houseFloors[i].floorR);
-		console.log(floorRVal + "= Floor R-Val");
-		console.log(typeof(floorRVal));
+		
 	
 		if (nettFloorArea > 0 && floorRVal > 0){
-			console.log("hello hello");
 			floorLoss = nettFloorArea / floorRVal;
-			console.log(floorLoss);
 		}
-		
-		console.log(floorLoss + "checking ()()(");
-		console.log(floorLossPrint + "checking ()()(");
 		
 		floorLossPrint = floorLossPrint + floorLoss;
 		
-		console.log(floorLossPrint + "checking ()()(");
-		
-		console.log(floorLossPrint + "the floor loss to be printed")
-		
 		totalLoss = totalLoss + floorLoss;
-		console.log("the total loss at this time is " + totalLoss);
 	}	
 	
 	
@@ -3176,26 +3151,17 @@ function proBuilding(refLoss){
 	let glazeCheck = totJoin/totWall;
 	
 	if (glazeCheck > 0.4){
-		console.log("Glazing exceed 40% of wall area")
 		document.getElementById("winWarn").innerHTML = "WARNING! Joinery elements exceed 40% of the total wall area";
 		warnBr.style.display = '';
 		
 		}
-		else{console.log("Glazing pass")
+		else{
 		document.getElementById("winWarn").innerHTML = "";
 		warnBr.style.display = 'none';
 	}
 	
 	
-	
-	console.log("total loss now" + totalLoss);
-	console.log("Slab loss now " + floorSlabLoss)
-	
 	totalLoss = (totalLoss + floorSlabLoss).toFixed(2);
-	
-	console.log("total loss after" + totalLoss);
-	
-	console.log("The total heat loss from this building is " + totalLoss + " W/°C");
 	
 	if (totalLoss > 0 && totalLoss < 5000){
 		document.getElementById("proTot").innerHTML = totalLoss + '<span class="resUnits">W/°C</span>';
@@ -3261,7 +3227,6 @@ var modal = document.getElementById("myModal");
 
 
 window.onload = function() {
-	console.log(modal);
     modal.style.display = "block";
 };
 
