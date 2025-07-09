@@ -21,7 +21,7 @@
 		</div>
 		
 		<div class="navMenu">
-			<p class="navItem"><a href="index.html" class="link-plain">CALCULATOR</a></p>
+			<p class="navItem"><a href="Calc.html" class="link-plain">CALCULATOR</a></p>
 			<p class="navItem"><a href="ContactPage.html" class="link-plain">CONTACT</a></p>
 			<p class="navItem"><a href="Tutorial.html" class="link-plain">TUTORIAL</a></p>
 		</div>
@@ -49,39 +49,49 @@
 	<div class="containerC">
 		<h1 style="padding-top:60px;">About</h1>
 		<p>
-			The Code Tools - H1 Calculator is a web-based tool for assessing the thermal efficiency of buildings and verifying compliance with New Zealand Building Code clause H1. For compliance purposes, this calculator can be used to assess housing and other buildings with an area of occupied space no greater than 300 m<sup>2</sup>.
+			The Code Tools - H1 Calculator is a web based tool for assessing the thermal efficiency of timber framed buildings and verifying compliance with New Zealand Building Code clause H1. For compliance purposes this calculator can be used to assess housing and other buildings with an area of occupied space no greater than 300 m2. 
 		</p>
 		
 		<h2>Definitions</h2>
 		<ul>
 			<li><strong>H1/AS1</strong> refers to H1/AS1, 5th edition</li>
 			<li><strong>NZS4214</strong> refers to NZS4214:2006</li>
-			<li><strong>R-value</strong> means thermal resistance rating (m²°C/W)</li>
-			<li><strong>K-value</strong> means thermal conductivity (W/mK)</li>
+			<li><strong>R-value</strong> refers to thermal resistance, expressed in square metre degrees Celsius per watt (m²°C/W).</li>
+			<li><strong>K-value</strong> refers to thermal conductivity, expressed in watts per metre-kelvin (W/mK).</li>
 			<li><strong>Climate zones</strong> are as defined in H1/AS1, Appendix C, Table C1.1.2.</li>
 		</ul>
 		
 		<h2>Material Properties</h2>
 		<p>
-			The thermal property values of all building materials are set in accordance with NZS4214 tables E1 (a-c).
+			The thermal resistance and conductivity values of all building materials are set in accordance from NZS4214 tables E1 (a-c).
 		</p>
 		<ul>
 			<li>Timber framing is deemed to have a K-value of 0.12.</li>
 			<li>Plasterboard linings are assumed to be 10mm thick and have an R-value of 0.04.</li>
+			<li>Fiber cement rigid air barriers are assumed to be 4.5mm thick and have an R-Value of R0.02.</li>
+			<li>Plywood rigid air barriers are assumed to be 7mm thick and have an R-Value of R0.05.</li>
 			<li>Brick is assumed to be 70mm thick and have an R-value of 0.06.</li>
 			<li>Timber Weatherboard is assumed to be 18mm thick and have an R-value of 0.14.</li>
 			<li>Ply is assumed to be 12mm thick and have an R-value of 0.10.</li>
 			<li>Fibre cement sheet is assumed to be 7.5mm thick and have an R-value of 0.03.</li>
 			<li>Fibre cement weatherboard is assumed to be 7.5mm thick and have an R-value of 0.03.</li>
 			<li>The <i>‘Other’</i> cladding option assigns a nominal R-value of 0.02.</li>
+			
+			
 		</ul>
 		<p>
-			Buildings with thicker cladding can still be assessed with this calculator, however, the benefits of the extra thermal resistance will not be reflected in the results, indicating better performance than calculated.
+			Buildings with thicker cladding can still be assessed with this calculator, however, the benefits of the extra thermal resistance will not be reflected in the results, indicating a lower heat loss figure than calculated.
+		</p>
+		<br>
+		<p>
+			Flooring is assumed to be wood-based, such as particle board or plywood, at least 18mm thick and have an R-Value of 0.14
 		</p>
 		
 		<h2>Construction R-values</h2>
 		<p>
-			Construction R-values of walls and roofs are calculated in accordance with NZS4214, and the isothermal planes method is used to account for thermal bridging. Roofing, roof underlay, and wall underlay are omitted for simplicity and because these elements have a negligible effect on thermal performance.
+			Construction R-values of suspended floors, walls, and roofs are calculated in accordance with NZS4214, and the isothermal planes method is used to account for thermal bridging. 
+			<br><br>
+			Roofing, and flexible underlays are omitted for simplicity and because these elements have a negligible effect on thermal performance.
 		</p>
 		<br>
 		<p> Surface resistance values are set as follows, and in accordance with NZS4214 Para 5.2</p>
@@ -99,6 +109,15 @@
 		</ul>
 		<p>
 			The construction R-value of the slab is in accordance from H1/AS1, Appendix F, Tables F1.2.2A-X. Area and Perimeter values must be measured on the interior side of all walls that delineate the extent of the thermal envelope.
+		</p>
+		
+		<h3>Suspended Floor</h3>
+		<p>
+			Suspended floors are presumed to consist of a flooring layer, and a timber framing and insulation layer. Optionally, the user may nominate a lining layer beneath, in which case a still air space can also be included within the framing and insulation layer.
+			<br><br>
+			Sub-floor perimeter walls are assumed to be exposed.
+			<br><br>
+			The R-value of a sub-floor space is derived from NZS4214 table E5.
 		</p>
 
 		<h3>Roof</h3>
@@ -122,7 +141,7 @@
 
 		<h3>Joinery</h3>
 		<p>
-			The R-value of typical joinery types is as per with H1/AS1 table E1.1.1.
+			The R-value of typical joinery types is as per H1/AS1 table E1.1.1.
 		</p>
 
 		<h3>Walls</h3>
@@ -137,7 +156,7 @@
 		<br><br>	
 			Internal walls are presumed to consist of a plasterboard layer, a timber framing and insulation layer, and a plasterboard layer.
 		<br><br>
-			Direct fix claddings and rigid air barriers are not supported by this calculator. Buildings with these features can still be assessed with this calculator, however, the thermal benefits of these features will not be reflected in the results, indicating better performance than calculated.
+				This calculator does not support direct fix cladding. While buildings with this cladding type can still be assessed, the corresponding thermal benefits are not included in the calculation, indicating a lower heat loss figure than calculated.
 		</p>
 
 		<h2>Results</h2>
