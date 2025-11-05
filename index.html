@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="calcstyle.css">
+    <title>H1 Energy Efficiency - Compliance Calculator</title>
+	<meta name="description" content="A calculator for assessing the thermal efficiency of timber framed buildings and checking compliance with New Zealand Building Code clause H1. Based on the calculation method described in H1/AS1 5th edition, amendment 1">
+	<meta name="keywords" content="thermal efficiency, H1 compliance, H1/AS1, New Zealand Building Code, building thermal calculator, climate zones, R-value, thermal resistance, thermal conductivity, building insulation, energy efficiency">
+
+	
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	
+</head>
+<body>
+
+	<!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2 style = "margin:0px;">Disclaimer, Terms and Conditions</h2>
+			<br>
+            <p>
+				Please read this notice carefully before using the Code Tools H1 Calculator.
+			</p>
+			<br>
+			<p>
+				By clicking <strong>‘Accept’</strong> below, you acknowledge that you have read, understood, and agree to be bound by the 
+				<a href="T&Cs.html" target="_blank" rel="noopener noreferrer">Terms and Conditions</a> that govern the use of this calculator.
+			</p>
+			<br>
+			<p>
+				If you do not agree, you must close this page and refrain from using the calculator.
+			</p>
+			<br>
+			 <p>
+				This calculator contains certain assumptions and limitations. Users are responsible for determining its suitability for their intended purpose.
+			 </p>
+			 <br><br>
+			
+
+			<label for="agree">I agree to the terms and conditions</label>
+			<input type="checkbox" id="agree">
+			<button onclick="acceptTerms()">Accept</button>
+				
+        </div>
+    </div>
+	
+	
+	
+	<div class="header">	
+	
+		<div class="logo">
+			<img src="Media/Logo.svg" style="width:100%;" alt="Code Tools logo">
+		</div>
+		
+		
+		
+			
+		<div class="navMenu">
+			<p class="navItem"><a href="guide.html" class="link-plain">USER-GUIDE</a></p>
+			<p class="navItem"><a href="about.html" class="link-plain">ABOUT</a></p>
+			<p class="navItem"><a href="contact.html" class="link-plain">CONTACT</a></p>
+			<p class="navItem"><a href="T&Cs.html" class="link-plain">T&Cs</a></p>
+		</div>
+	
+	
+	
+	</div>
+	
+	
+	
+	
+	<div class="banner">
+	
+		<div class="title">
+		
+		
+			<div class="checkIt">
+				<h1 class="h1">H1</h1>
+				<h1 class="calc">CALCULATOR</h1>
+			</div>
+		
+		</div>
+	
+		<img src="Media/Banner.jpg" class="banImg" alt="H1 Calculator Banner">
+			
+	</div>
+
+
+	
+	
+	
+	<form>
+	
+		<div class="white">
+			<div class="container" id="projectDetails">
+			
+				
+				<div class="headingBar">
+					<p class="heading" >Project Details</p> 
+				</div>
+				
+				<div class="content">
+				
+					<div class="nextTo">
+					
+						<div class="dets">
+							<div>
+								<label for="name">Project Name</label> <br>
+								<input class="details" type="text" id="name" name="name" maxlength="60">
+							</div>
+						</div>
+						
+						
+						
+						<div class="dets">
+							<div>
+								<label for="author">Author</label> <br>
+								<input class="details" type="text" id="author" name="author" maxlength="60">
+							</div>
+						</div>
+					
+					</div>
+					
+					<br>
+					
+					<div class="nextTo">
+					
+						<div class="dets">
+							<div class="fit">
+								<label for="address">Address</label> <br>
+								<input class="details" type="text" id="address" name="address" maxlength="80">
+							</div>
+						</div>
+						
+						<div class="dets">
+							<div>
+								<label for="zone">Climate Zone</label> 
+								<br>
+								<input type="radio" id="zone1" name="zone" value="1" onchange="setClimate()">
+								<label for="zone1">1</label>
+								<input type="radio" id="zone2" name="zone" value="2" onchange="setClimate()">
+								<label for="zone2">2</label>
+								<input type="radio" id="zone3" name="zone" value="3" onchange="setClimate()">
+								<label for="zone3">3</label>
+								<input type="radio" id="zone4" name="zone" value="4" onchange="setClimate()">
+								<label for="zone4">4</label>
+								<input type="radio" id="zone5" name="zone" value="5" onchange="setClimate()">
+								<label for="zone5">5</label>
+								<input type="radio" id="zone6" name="zone" value="6" onchange="setClimate()">
+								<label for="zone6">6</label>
+							</div>		
+						</div>
+					
+					</div>
+				
+				</div>
+			
+			</div>
+		</div>
+			
+		<div class="grey">
+			
+			<div class="container" id="slab">
+			
+				<div class="headingBar">
+				
+					<p class="heading">Slab</p> 
+					
+					<div class ="overR">
+						<span style="font-size:14pt;">(</span><input type="checkbox" id="slabOverride" name="slabOverride" onchange="toggleOver('over', this.checked)"> <label for="slabCustomR">R-Value Override</label><span style="font-size:14pt;">)</span>
+					</div>
+					
+				</div>
+				
+				<div class="content">
+					
+					<div class="nextTo">
+
+						<div class="half">
+							<div class="sides" id="slabTypeD">
+								<label for="100mm">Type</label>	
+								<br>					
+								<input type="radio" id="100mm" name="type" value="100mm" onchange="calcSlabR()"><label for="100mm">100mm Slab</label>
+								<br>
+								<input type="radio" id="raft" name="type" value="raft" onchange="calcSlabR()"><label for="raft">305mm Raft Slab</label>
+								<br>
+								<br>
+							</div>
+									
+							<div style="display:flex;">
+								<div class="sides" >
+									<label for="slabArea">Area</label> 
+									<br>
+									<div>
+									<input class="areaA" type="number" id="slabArea" name="slabArea" min="1" max="300" step="0.1" onchange="updateRoundedValue('slabArea'); calcSlabR()"><span class="units">m²</span>
+									</div>
+								</div>
+								
+								<div id="slabOver" style="display:none;">
+									<label for="slabOver">Construction</label> <br>
+									<span class="rLabel">R</span><input class="rValueA" type="number" id="slabOverR" name="slabOverR" step="0.1" min="1.8" max="8" onchange="updateRoundedValue('slabOverR'); calcSlabR()">
+								</div>
+
+								<div class="sides" id="sPeri">
+									<label for="slabPerimeter">Perimeter length</label>
+									<br>
+									<input class="distanceA" type="number" id="slabPerimeter" name="slabPerimeter" min="1" max="200" step="0.1" onchange="updateRoundedValue('slabPerimeter'); calcSlabR()"><span class="units">m</span>
+								</div>
+							</div>
+							<div class="sides" id="periNote" style="margin-top:6px;">
+								<p class="smallTxt">(Area and Perimeter measured inside framing)</p>
+							</div>
+									
+						</div>
+							
+							<div class="half" id="slabFeatures">
+								<div class="sides">									
+									<label for="veneer">Features</label><br>
+
+									<div id="slabFeatHide">
+										<input type="checkbox" id="veneer" name="veneer" onchange="toggle('veneer', this.checked)">
+										<label for="veneer">Brick Veneer (all ext walls)</label><br>
+										<input type="checkbox" id="slabEdge" name="slabEdge" onchange="toggle('edge', this.checked)">
+										<label for="slabEdge">Vertical Edge Insulation R1.0</label><br>
+										<input type="checkbox" id="underSlab" name="underSlab" onchange="toggle('under', this.checked)">
+										<label for="underSlab">Under Slab Insulation R1.2</label><br>
+									</div>	
+									
+									<input type="checkbox" id="embHeat" name="embHeat" onchange="toggleEmb('embed', this.checked)">
+									<label for="underSlab" style="font-weight:bold;">Embedded Heating</label>
+								</div>
+							</div>
+					
+					</div>
+					
+					<br id = "slabBreak" style = "display:none;">
+					
+					<div class = "nextTo">
+					
+						<div class = "parameters">
+						
+							<p id="slabDets"> </p> 
+							
+						</div>
+						
+						<div class = "outPut">
+						
+							<div class = "resSpace">
+							</div>
+							
+							<div class = "lossLabel">
+								<p id="sLabel"></p>
+							</div>
+							
+							<div class = "resDiv">
+								<p id="slabResult"> </p> 
+							</div>
+						</div>
+					
+					</div>	
+					
+
+					<div class = "warning" id="slabWarnBr" style="display:none;">
+						
+						<br>
+						<p id="slabWarn"></p> 
+							
+					</div>
+				
+				</div>
+				
+						
+				
+			</div>
+		
+		</div>
+		
+		<div class="white">
+			<div class="container" id = "timFloor">
+			
+			
+				<div class="headingBar">
+					<p class="heading">Suspended Floor</p>
+				</div>
+				
+				<div class="content">
+				
+					<div id="floorTypes">
+						
+					</div>
+					
+					
+					<br>
+					
+					<div class = "nextTo">
+					
+						<div style="margin-top:-17px;"><button id="addFloor" class="addBtn">+ Floor</button></div>
+						<div style="margin-top:-17px; margin-left: 15px;"><button id="lessFloor" class="lessBtn">- Floor</button></div>
+					
+					
+					</div>
+				
+				
+				</div>
+			
+			</div>
+		</div>
+		
+		<div class ="grey">
+			<div class="container" id = "roofs">
+			
+			
+				<div class="headingBar">
+					<p class="heading">Roof</p>
+				</div>
+				
+				<div class="content">
+				
+					<div id="roofTypes">
+						
+					</div>
+					
+					
+					<br>
+					
+					<div class = "nextTo">
+					
+						<div style="margin-top:-17px;"><button id="addRoof" class="addBtn">+ Roof</button></div>
+						<div style="margin-top:-17px; margin-left: 15px;"><button id="lessRoof" class="lessBtn">- Roof</button></div>
+					
+					
+					</div>
+				
+				
+				</div>
+			
+			</div>
+		</div>
+				
+		<div class="white">
+		
+			<div class="container" id="wallsCon">
+			
+				<div class="headingBar">
+					<p class="heading">Wall Construction</p>
+				</div>
+				
+				<div class="content">
+			
+					<div id="joinery" style="margin-bottom:17px; border-bottom: 1px solid gray;">
+					
+						
+							<label for="joinerySpec">Typical Joinery Spec</label> <br>
+							<select id="joinerySpec" name="joinerySpec" onchange="updateWinR()">
+								<option value="0.37">Aluminium - Ug 1.1 LowE2/Clear Argon Double - R0.37</option>
+								<option value="0.33">Aluminium - Ug 1.6 LowE2/Clear Argon Double - R0.33</option>
+								<option value="0.46">Aluminium thermally broken - Ug 1.3 LowE3/Clear Argon Double - R0.46</option>
+								<option value="0.56">uPVC - Ug 1.6 LowE2/Clear Argon Double - R0.56</option>
+							</select>
+							
+						<div>	
+							<br>
+						</div>
+					
+					</div>
+				
+				
+					<div id="wallTypes">
+					
+					</div>
+					<br>
+					<div style="margin-top:-17px;">
+						<button id="addWallType" class = "addBtn">+ Type</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+					
+					
+		<div class="grey">
+			<div class="container" id="walls">
+			
+				<div class="headingBar">
+					<p class="heading">Walls</p>
+				</div>
+				
+				<div class="content">
+					
+					
+					<div id="building">
+					
+					</div>
+					
+					
+					<div class = "nextTo">
+						<div>
+							<button id="addWall" class = "addBtn">+ Wall</button>
+						</div>	
+							
+						<div style = "margin-left: 15px;">	
+							<button id="lessWall" class = "lessWall">- Wall</button>
+						</div>
+					
+					</div>
+					
+					<br style = "display: none;" id = 'warnBreak' >
+					
+					<div class = "warning">
+						
+						<p id="winWarn"></p> 
+							
+					</div>
+				
+				</div>
+					
+			</div>
+			
+		</div>
+		
+		
+		<div class="white">	
+			<div class="container" id="results">
+			
+				<div class="headingBar">
+					<p class="heading">Results</p>
+				</div>
+				
+				<div class="content">
+				
+					<div style = "border:0px solid red; display: inline-block; margin-left:0px;">
+					
+						<div class = "nextTo" >
+						
+							<div style = "width: 156px;">
+									<div style = "height:23px; margin-bottom: 4px;"></div>
+									<p class = "resultLabel">Slab</p>
+									<p class = "resultLabel">Timber Floor</p>	
+									<p class = "resultLabel">Roof</p> 
+									<p class = "resultLabel">Skylight</p> 
+									<p class = "resultLabel">Walls</p>
+									<p class = "resultLabel">Joinery</p> 
+							</div>
+						
+							<div style = "border: 0px solid grey; text-align:center;">
+								
+								<div style = "border: 0px solid grey; width:160px; margin-bottom:4px;" >
+									<p class="itemName">Proposed Build</p>
+								</div>
+								
+									
+								<div style = "border:0px solid grey; display: inline-block;">
+									<p id = "proSlab" class = "resultItems"> </p>
+									<p id = "proFloor" class = "resultItems"> </p>											
+									<p id = "proRoof" class = "resultItems"> </p>	
+									<p id = "proSky" class = "resultItems"> </p>	
+									<p id = "proWalls" class = "resultItems"> </p>	
+									<p id = "proOpen" class = "resultItems"> </p>	
+								</div>
+								
+								
+								<div style = "border-top: 1px solid black; border-bottom: 2px solid black; height:26px; margin-top: 4px;">
+									
+									<div style = "display: inline-block;">
+										<p id = "proTot" class = "resultItems1" style = "font-weight:bold;"></p>	
+									</div>
+									
+								</div>
+		
+								
+							</div>
+							
+							
+							<div style="width:89px;"></div>
+							
+						
+						
+							<div style = "border: 0px solid grey; text-align:center;">
+								
+								<div style = "border: 0px solid grey; width:160px; margin-bottom:4px;" >
+									<p class="itemName">Reference Build</p>
+								</div>	
+								
+									
+								<div style = "border:0px solid grey; display: inline-block;">
+									<p id = "refSlab" class = "resultItems"> </p>
+									<p id = "refFloor" class = "resultItems"> </p>
+									<p id = "refRoof" class = "resultItems"> </p>	
+									<p id = "refSky" class = "resultItems" > </p>	
+									<p id = "refWalls" class = "resultItems"> </p>	
+									<p id = "refOpen" class = "resultItems"> </p>	
+								</div>
+								
+								
+								<div style = "border-top: 1px solid black; border-bottom: 2px solid black; height:26px; margin-top: 4px;">
+									
+									<div style = "display: inline-block">
+										<p id = "refTot" class = "resultItems" style = "font-weight:bold;"></p>	
+									</div>
+									
+								</div>
+		
+							</div>
+							
+							<div style="width:60px;"></div>
+						
+							<div>
+								<div style = "height:23px; margin-bottom: 4px;"></div>
+								<p class = "refItems" id = "slabVals"></p>
+								<p class = "refItems" id = "floorVals"></p>
+								<p class = "refItems" id = "roofVals"></p>
+								<p class = "refItems"></p>
+								<p class = "refItems" id = "wallVals"></p> 
+								<p class = "refItems" id = "openVals" style = "margin-right:-8px;"></p> 
+							</div>
+				
+							
+						
+							
+							
+						</div>
+					</div>
+							
+				</div>
+				
+			</div>
+			
+		</div>
+			
+		
+	</form>
+		
+	<div class="footer">
+		
+	</div>	
+	
+	
+	<script src="script.js"></script>
+	
+
+</body>
+</html>
