@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="calcstyle.css">
+    <title>H1 Calculator - About</title>
+	<meta name="description" content="Discover the technical explanation, key assumptions, and definitions for the H1 Thermal Efficiency Calculator.">
+	<meta name="keywords" content="thermal efficiency, H1 compliance, H1/AS1, New Zealand Building Code, building thermal calculator, climate zones, R-value, thermal resistance, thermal conductivity, building insulation, energy efficiency">
+	
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+	
+</head>
+<body>
+	
+	
+	
+	<div class="header">	
+	
+		<div class="logo">
+			<img src="Media/Logo.svg" style="width:100%;" alt="Code Tools logo">
+		</div>
+		
+		<div class="navMenu">
+			<p class="navItem"><a href="index.html" class="link-plain">CALCULATOR</a></p>
+			<p class="navItem"><a href="ContactPage.html" class="link-plain">CONTACT</a></p>
+			<p class="navItem"><a href="Tutorial.html" class="link-plain">TUTORIAL</a></p>
+		</div>
+	
+	</div>
+		
+	
+	
+	<div class="banner">
+	
+		<div class="title">
+		
+		
+			<div class="checkIt">
+				<h1 class="h1">H1</h1>
+				<h1 class="calc">CALCULATOR</h1>
+			</div>
+		
+		</div>
+	
+				<img src="Media/Banner.jpg" class="banImg" alt="H1 Calculator Banner">
+			
+	</div>
+	
+	<div class="containerC">
+		<h1 style="padding-top:60px;">About</h1>
+		<p>
+			The Code Tools - H1 Calculator is a web based tool for assessing the thermal efficiency of timber framed buildings and verifying compliance with New Zealand Building Code clause H1. For compliance purposes this calculator can be used to assess housing and other buildings with an area of occupied space no greater than 300 m2. 
+		</p>
+		
+		<h2>Definitions</h2>
+		<ul>
+			<li><strong>H1/AS1</strong> refers to H1/AS1, 5th edition</li>
+			<li><strong>NZS4214</strong> refers to NZS4214:2006</li>
+			<li><strong>R-value</strong> refers to thermal resistance, expressed in square metre degrees Celsius per watt (m²°C/W).</li>
+			<li><strong>K-value</strong> refers to thermal conductivity, expressed in watts per metre-kelvin (W/mK).</li>
+			<li><strong>Climate zones</strong> are as defined in H1/AS1, Appendix C, Table C1.1.2.</li>
+		</ul>
+		
+		<h2>Material Properties</h2>
+		<p>
+			The thermal resistance and conductivity values of all building materials are set in accordance from NZS4214 tables E1 (a-c).
+		</p>
+		<ul>
+			<li>Timber framing is deemed to have a K-value of 0.12.</li>
+			<li>Plasterboard linings are assumed to be 10mm thick and have an R-value of 0.04.</li>
+			<li>Fiber cement rigid air barriers are assumed to be 4.5mm thick and have an R-Value of R0.02.</li>
+			<li>Plywood rigid air barriers are assumed to be 7mm thick and have an R-Value of R0.05.</li>
+			<li>Brick is assumed to be 70mm thick and have an R-value of 0.06.</li>
+			<li>Timber Weatherboard is assumed to be 18mm thick and have an R-value of 0.14.</li>
+			<li>Ply is assumed to be 12mm thick and have an R-value of 0.10.</li>
+			<li>Fibre cement sheet is assumed to be 7.5mm thick and have an R-value of 0.03.</li>
+			<li>Fibre cement weatherboard is assumed to be 7.5mm thick and have an R-value of 0.03.</li>
+			<li>The <i>‘Other’</i> cladding option assigns a nominal R-value of 0.02.</li>
+			
+			
+		</ul>
+		<p>
+			Buildings with thicker cladding can still be assessed with this calculator, however, the benefits of the extra thermal resistance will not be reflected in the results, indicating a lower heat loss figure than calculated.
+		</p>
+		<br>
+		<p>
+			Flooring is assumed to be wood-based, such as particle board or plywood, at least 18mm thick and have an R-Value of 0.14
+		</p>
+		
+		<h2>Construction R-values</h2>
+		<p>
+			Construction R-values of suspended floors, walls, and roofs are calculated in accordance with NZS4214, and the isothermal planes method is used to account for thermal bridging. 
+			<br><br>
+			Roofing, and flexible underlays are omitted for simplicity and because these elements have a negligible effect on thermal performance.
+		</p>
+		<br>
+		<p> Surface resistance values are set as follows, and in accordance with NZS4214 Para 5.2</p>
+		<ul>
+			<li>Internal surface R-value: 0.09</li>
+			<li>External surface R-value: 0.03</li>
+		</ul>
+		
+		<p>Areas of building elements that are not part of the thermal envelope must not be included in your calculation.</p> 
+
+		<h3>Slab</h3>
+		<ul>
+			<li>A <i>‘100mm Slab’</i> is a typical 100mm thick, concrete slab on ground</li>
+			<li>A <i>'305mm Raft Slab'</i> is a typical waffle-type slab on the ground, consisting of an 85mm slab on 220mm ribs</li>
+		</ul>
+		<p>
+			The construction R-value of the slab is in accordance from H1/AS1, Appendix F, Tables F1.2.2A-X. Area and Perimeter values must be measured on the interior side of all walls that delineate the extent of the thermal envelope.
+		</p>
+		
+		<h3>Suspended Floor</h3>
+		<p>
+			Suspended floors are presumed to consist of a flooring layer, and a timber framing and insulation layer. Optionally, the user may nominate a lining layer beneath, in which case a still air space can also be included within the framing and insulation layer.
+			<br><br>
+			Sub-floor perimeter walls are assumed to be exposed.
+			<br><br>
+			The R-value of a sub-floor space is derived from NZS4214 table E5.
+		</p>
+
+		<h3>Roof</h3>
+		<ul>
+			<li>Roof <i>‘Area’</i> is an area of a roof including any skylights within its bounds</li>
+			<li>Roof <i>‘Nett area’</i> is an area of a roof excluding any skylights within its bounds</li>
+		</ul>
+		<p>
+			Trusses are assumed to have timber frames. Truss spacing is assumed to be at 900mm centers. Truss chords are assumed to have a width of 90mm. 
+			<br><br>
+			Truss roofs are presumed to consist of a plasterboard layer, a timber framing and insulation layer, and an insulation layer. 
+			<br><br>
+			The still air space in a truss roof is deemed to have an R-value of 0.11 (non-reflective) in accordance with NZS4214 Table E2.
+		<br><br>
+			<i>'Layer 1'</i> is the bottom layer of insulation and is positioned between the truss chords. 
+			<br>
+			<i>'Layer 2'</i> is the top layer of insulation and is positioned on top of layer 1 and the truss chords. 
+			<br><br>
+			Rafter roofs are presumed to consist of a plasterboard layer, and a timber framing and insulation layer.
+		</p>
+
+		<h3>Joinery</h3>
+		<p>
+			The R-value of typical joinery types is as per H1/AS1 table E1.1.1.
+		</p>
+
+		<h3>Walls</h3>
+		<ul>
+			<li>Wall <i>‘Area’</i> is an area of wall including any joinery (windows or doors) within its bounds</li>
+			<li>Wall <i>‘Nett area’</i> is the area of a wall excluding any joinery within its bounds</li>
+		</ul>
+		<p>
+			All cladding is assumed to be installed over a ventilated cavity, consequently, the thermal resistance of all cladding is de-rated by 50% in accordance with NZS4214. 
+		<br><br>
+			External walls are presumed to consist of a plasterboard layer, a timber framing and insulation layer, a ventilated cavity layer, and an external cladding layer.
+		<br><br>	
+			Internal walls are presumed to consist of a plasterboard layer, a timber framing and insulation layer, and a plasterboard layer.
+		<br><br>
+				This calculator does not support direct fix cladding. While buildings with this cladding type can still be assessed, the corresponding thermal benefits are not included in the calculation, indicating a lower heat loss figure than calculated.
+		</p>
+
+		<h2>Results</h2>
+		<p>
+			The heat loss of the reference building is calculated in accordance with H1/AS1 table 2.1.3.4a. 
+			<br><br>
+			The heat loss of the proposed building is calculated in accordance with H1/AS1 paragraph 2.1.3.6.
+			<br> <br> <br><br>
+		</p>
+	
+	
+	
+	</div>
+
+
+		
+	<div class="footer">
+		
+	</div>	
+	
+
+</body>
+</html>
