@@ -10,7 +10,6 @@ body{
   .addBtn,
   .addWindow,
   .prntBtn,
-  .navMenu,
   .addSkylight,
   .removeSkylight,
   .lessBtn,
@@ -20,6 +19,11 @@ body{
   {
     display: none !important;
   }
+
+ .navMenu {
+    visibility: hidden; /* hides the nav, but keeps the space it occupies */
+  }
+	
 }
 
 
@@ -1044,6 +1048,7 @@ margin-bottom:6px;
 
 
 	
+
 
 
 
