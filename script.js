@@ -3514,3 +3514,28 @@ function acceptTerms() {
         alert("Please agree to the terms and conditions."); // Display an alert if the checkbox is not checked
     }
 }
+
+
+// For print hint modal
+
+const printBtn = document.getElementById('printBtn');
+const printModal = document.getElementById('printHintModal');
+const continueBtn = document.getElementById('printHintContinue');
+
+  // Open modal instead of printing immediately
+  printBtn.addEventListener('click', () => {
+    printModal.classList.remove('hidden');
+  });
+
+  // Continue to print
+  continueBtn.addEventListener('click', () => {
+    printModal.classList.add('hidden');
+    window.print();
+  });
+
+  // Close when clicking outside modal content
+  printModal.addEventListener('click', (e) => {
+    if (e.target === printModal) {
+      printModal.classList.add('hidden');
+    }
+  });

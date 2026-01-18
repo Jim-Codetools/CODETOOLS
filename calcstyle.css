@@ -15,7 +15,8 @@ body{
   .removeSkylight,
   .lessBtn,
   .lessWall,
-  .removeWindow
+  .removeWindow,
+  .print-hint
   {
     display: none !important;
   }
@@ -1002,6 +1003,43 @@ select:focus {
 .disHead{
 font-weight:bold; 
 margin-bottom:6px;
+}
+
+
+
+/* Print hint modal backdrop */
+.print-hint-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* safely above most modals */
+}
+
+/* Hidden state */
+.print-hint-modal.hidden {
+  display: none;
+}
+
+/* Modal panel */
+.print-hint-modal__content {
+  background: #fff;
+  max-width: 420px;
+  width: 100%;
+  padding: 20px 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+
+
+/* Never print the modal */
+@media print {
+  .print-hint-modal {
+    display: none !important;
+  }
 }
 
 

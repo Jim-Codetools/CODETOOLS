@@ -52,7 +52,7 @@
 
 			<label for="agree">I agree to the terms and conditions</label>
 			<input type="checkbox" id="agree">
-			<button onclick="acceptTerms()">Accept</button>
+			<button class="addBtn" onclick="acceptTerms()">Accept</button>
 				
         </div>
     </div>
@@ -534,8 +534,11 @@
 						</div>
 					</div>
 					
-					<div style = "margin-top: 17px;">
-						<button id="print" class = "prntBtn" type="button" onclick="window.print()">Print Report</button>
+					<div style = "margin-top: 34px;">
+						<button id="printBtn" class="prntBtn" type="button">
+							Print Report
+						</button>
+						
 					</div>	
 							
 				</div>
@@ -546,6 +549,23 @@
 			
 		
 	</form>
+	
+	<div id="printHintModal" class="print-hint-modal hidden">
+		<div class="print-hint-modal__content">
+			<p>
+				Enable
+				<strong>Background graphics</strong>
+				in <br>the following print settings for best results.
+			</p>
+		<button class="addBtn" id="printHintContinue" type="button" style = "margin-top: 12px;">
+			Continue
+		</button>
+		</div>
+	</div>
+	
+	
+	
+	
 		
 	<div class="footer">
 		
@@ -559,4 +579,3 @@
 
 </body>
 </html>
-
