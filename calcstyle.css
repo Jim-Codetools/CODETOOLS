@@ -19,12 +19,12 @@ body{
   {
     display: none !important;
   }
-
- .navMenu {
+  
+  .navMenu {
     visibility: hidden; /* hides the nav, but keeps the space it occupies */
 	height: 18px; 
   }
-	
+  
 }
 
 
@@ -123,6 +123,17 @@ body{
 	
 }
 
+.calc1 {
+	display: inline; /* Display as inline element */
+	font-size: 15px; /* Match font size of paragraph */
+	margin: 0; /* Remove default margin */
+	padding: 0; /* Remove default padding */
+	line-height: 1.0; /* Set line height */
+	font-weight: normal; /* Set font weight to normal */
+	text-align: center;
+	
+}
+
 .header {
     padding: 0px 15% 0px 0px;   
 	margin-left: calc( max(10%, 110px) );
@@ -208,6 +219,10 @@ button {
 	width: 84px;
 }
 
+.addBtnWide {
+	width:120px;
+}
+
 button:hover {
   background-color: rgb(210, 210, 210); ;
 }
@@ -221,7 +236,7 @@ button:hover {
 .prntBtn {
 	color: white;
 	background-color: rgb(4, 104, 148);
-	width: 168px;
+	width: 160px;
 }
 
 .lessBtn, .removeSkylight, .lessWall, .removeWindow {
@@ -477,6 +492,8 @@ select{
 	display: flex;
 	margin: 0;
 	border-radius: 0px;
+	position: relative;
+	align-items: baseline;
 }
 
 .overR {
@@ -692,7 +709,32 @@ input[type="number"].rValueA {
 
 .nextTo{
 	display: flex;
+      
 }
+
+
+
+.nextToB {
+    display: flex;
+    align-items: center;  /* vertically centers children */
+   
+    gap: 8px;             /* optional: spacing between checkbox, label, input */
+}
+
+
+.nextToB input[type="checkbox"] {
+    margin: 0;            /* remove default margins */
+    padding: 0;           /* remove default padding */
+    vertical-align: middle; /* helps align with label */
+}
+
+.nextToB label {
+    margin: 0;
+    line-height: 1.2;     /* match height of checkbox */
+}
+
+
+
 
 .index{
 	width: 32px;
@@ -762,6 +804,21 @@ input[type="number"].rValueA {
 	margin: 0 0 0 0;
 }
 
+.halfMan{
+	 flex-shrink: 0;
+	width:385px;
+	border: 0px solid blue;
+	padding: 0;
+	margin: 0 0 0 0;
+}
+
+.halfOther{
+	flex-shrink: 0;
+	border: 0px solid blue;
+	padding: 0;
+	margin: 0 0 0 0;
+}
+
 .dimensions{
 	border: 0px solid blue;
 	padding: 0;
@@ -772,6 +829,13 @@ input[type="number"].rValueA {
 	border: 0px solid blue;
 	margin: 0;
 	padding: 0px 60px 0px 0px;
+}
+
+.sidesA {
+    display: flex;
+    align-items: center;  /* vertically centers input and unit inside sidesA */
+    margin-left: 8px;     /* spacing from the label */
+    padding: 0;
 }
 
 .sides1{
@@ -1048,9 +1112,81 @@ margin-bottom:6px;
 }
 
 
+
+
+.calcCard {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: rgb(240, 240, 240);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    text-align: left;
+	border: 1px solid rgba(0,0,0,0.05);
+}
+
+.calcCard h2 {
+    margin-bottom: 10px;
+}
+
+.subText {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
 	
+	color: white;
+	background-color: rgb(4, 104, 148);
+
+    text-decoration: none;
+    border-radius: 6px;
+}
 
 
+.contentSection {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px 40px;
+    
+    background-color: #ffffff;
+    border-radius: 12px;
+    
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+	
+	border: 1px solid rgba(0,0,0,0.05);
+    
+    line-height: 1.6;
+}
+
+.contentSection h2 {
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+}
+
+.contentSection p {
+    margin-bottom: 15px;
+}
+
+.contentSection ul {
+    padding-left: 20px;
+}
+
+
+
+
+
+
+.contentSection li {
+    margin-bottom: 8px;
+}
+
+
+	
 
 
 
